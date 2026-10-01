@@ -46,9 +46,12 @@ async function refresh(){await checkChain();if(manifest){validatePlan(manifest,1
  if(approvals.length&&(!model.eligible||approvals[0].proposal.stateHash!==model.stateHash||BigInt(approvals[0].nonce)!==snapshot.nonce+1n||BigInt(approvals[0].proposal.deadline)<=snapshot.timestamp+snapshot.exitDelay))approvals=[];
  if(vetoSignature&&snapshot.pending.nonce!==BigInt(vetoSignature.nonce))vetoSignature=null;
  }render();}
-async function run(fn){if(busy)return;busy=true;render();message('Waiting for verification or wallet confirmation…');try{await fn();message('Ready. Use test ETH only. Save deployment and signature files for the other participants.');}
- catch(error){message(error.shortMessage??error.message,true);}
- finally{busy=false;if(provider){try{await refresh();}catch(error){config=null;snapshot=null;model=null;message(error.shortMessage??error.message,true);}}render();}}
+async function run(fn){if(busy)return;busy=true;render();message('Waiting for verification or wallet confirmation…');let failure;
+ try{await fn();}catch(error){failure=error.shortMessage??error.message;}
+ finally{busy=false;if(provider){try{await refresh();}catch(error){config=null;snapshot=null;model=null;failure=error.shortMessage??error.message;}}render();
+  message(failure??'Ready. Use test ETH only. Save deployment and signature files for the other participants.',!!failure);
+ }
+}
 $('connect').addEventListener('click',()=>run(async()=>{
  if(!window.ethereum)throw new Error('Install or enable a browser wallet with Sepolia support');
  await window.ethereum.request({method:'eth_requestAccounts'});

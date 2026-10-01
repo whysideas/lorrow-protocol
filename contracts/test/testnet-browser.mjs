@@ -29,7 +29,7 @@ try {
  await page.addInitScript(()=>{const handlers={};window.ethereum={request:request=>window.localWalletRequest(request),on:(type,handler)=>{(handlers[type]??=[]).push(handler);}};
   window.simulateAccountChange=addresses=>(handlers.accountsChanged??[]).forEach(fn=>fn(addresses));});
  await page.goto(app.url);
- async function idle(){await page.waitForFunction(()=>!document.getElementById('notice').textContent.includes('Waiting'));assert.equal(await page.locator('#notice').evaluate(el=>el.classList.contains('error')),false,await page.locator('#notice').textContent());}
+ async function idle(){await page.waitForFunction(()=>!document.getElementById('notice').textContent.includes('Waiting')&&!document.getElementById('connect').disabled);assert.equal(await page.locator('#notice').evaluate(el=>el.classList.contains('error')),false,await page.locator('#notice').textContent());}
  await page.locator('#connect').click();await idle();
  await page.locator('#lender').fill(accounts[1].address);await page.locator('#committee').fill(accounts.slice(2).map(w=>w.address).join('\n'));
  await page.locator('#terms-form details summary').click();await page.locator('#exit-delay').fill('10');
