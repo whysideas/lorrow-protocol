@@ -23,3 +23,27 @@ jobs:
       - run: npm --prefix contracts ci
       - run: npm test
 
+
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: contracts/package-lock.json
+      - run: npm --prefix contracts ci
+      - name: Install browser QA tools separately from project dependencies
+        run: npm install --prefix "$RUNNER_TEMP/lorrow-browser" --no-save --package-lock=false playwright@1.56.1
+      - name: Install Chromium
+        run: node "$RUNNER_TEMP/lorrow-browser/node_modules/playwright/cli.js" install chromium --with-deps
+      - name: Exercise browser walkthrough
+        run: LORROW_PLAYWRIGHT_MODULE="$RUNNER_TEMP/lorrow-browser/node_modules/playwright" node contracts/test/browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: walkthrough-screenshots
+          path: contracts/artifacts/walkthrough-*.png
+          if-no-files-found: ignore

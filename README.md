@@ -4,7 +4,7 @@ Open-source reference implementation of the [Lorrow lending standard](https://wh
 
 Lorrow connects specific lenders and borrowers through immutable crypto loan terms. This repository starts with a small collateral vault and grows toward a reproducible loan demonstration with independently verifying witnesses and a frontend anyone can host.
 
-**Current status: research prototype. An ETH-only fixed-term loan policy and local lifecycle demonstration exist. No production market, independent witness service or audit exists yet. Use local test assets only.**
+**Current status: research prototype. An ETH-only fixed-term loan policy and local lifecycle demonstration exist. A browser walkthrough and three local witness processes are available. No production market, independently operated witness service or audit exists yet. Use local test assets only.**
 
 ## Run the existing prototype
 
@@ -18,6 +18,17 @@ npm run demo
 
 The tests compile Solidity, start an in-memory EVM and exercise signatures, delayed settlement, vetoes, recipient claims and hostile withdrawal scenarios. No wallet, RPC subscription or live assets are required. Test keys are public development keys.
 
+## Open the browser walkthrough
+
+```sh
+npm run walkthrough
+```
+
+Open **http://127.0.0.1:4173**. Fund, repay or default, inspect witness decisions,
+queue, veto and settle a loan with local test assets. The command starts the
+local chain and three witness processes. Keep the terminal running; Ctrl+C stops
+and discards the chain. See [the walkthrough guide](docs/WALKTHROUGH.md).
+
 ## What is implemented
 
 - A directly deployed, immutable native-ETH vault for one loan.
@@ -29,6 +40,8 @@ The tests compile Solidity, start an in-memory EVM and exercise signatures, dela
 - Fixed principal/interest, named lender funding, full repayment and maturity grace.
 - Debt-capped default, borrower surplus and unfunded collateral return.
 - Thirty escrow checks plus loan scenarios and varied loan allocations.
+- Browser walkthrough of repayment/default/unfunded expiry and proposal security controls.
+- Three separate local witness processes with an independent JS rules implementation.
 
 The mutable `MockPolicy` is exclusively a test fixture. It is not debt accounting and must never secure a loan. Honest witnesses can reject a policy mistake only when all relevant vault paths correctly enforce their gate. A vault bug can bypass that protection.
 
@@ -37,10 +50,12 @@ The mutable `MockPolicy` is exclusively a test fixture. It is not debt accountin
 | Directory | Status |
 |---|---|
 | `contracts/` | Vault, fixed-term loan, test fixtures and local EVM suites |
+| `witness/` | Local signer processes and independently computed ETH rules model |
+| `app/` | Local browser walkthrough served by the Node demo server |
 | `docs/` | Solo-build roadmap, architecture notes and proposed compensation |
 | `.github/workflows/` | Automated local contract tests |
 
-Witness, SDK and frontend packages will be added when they contain working implementations.
+Witnesses and the browser walkthrough now have working local implementations. A reusable SDK and wallet-connected testnet interface remain future work.
 
 ## Build milestones
 
@@ -48,8 +63,8 @@ Witness, SDK and frontend packages will be added when they contain working imple
 2. **Done locally:** maturity default, debt-capped allocation and borrower surplus.
    Cross-asset ETH/token loans and oracle valuation remain future work.
 3. Implement partial repayment, breach, cure and recovery required by Core.
-4. Add an independent Rust state model and three locally runnable witnesses.
-5. Deliver a browser UI and a one-command reproducible loan demonstration.
+4. **Done locally:** independent JS state model and three signer processes. Rust, durable signing and independent operation remain future work.
+5. **Done locally:** browser UI and one-command loan walkthrough.
 6. Publish a public testnet demonstration and invite independent review.
 
 See [minimal loan rules and ten invariants](docs/MINIMAL_LOAN.md), [the active solo-build plan](docs/ROADMAP.md), [fee proposal](docs/FEES.md), [vault details](contracts/README.md) and [contribution guide](CONTRIBUTING.md).

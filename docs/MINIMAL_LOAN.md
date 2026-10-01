@@ -105,8 +105,9 @@ Three test signing keys are one process under one operator, not independent witn
 A stalled committee can lock collateral indefinitely. Rejecting recipients retain
 claims but cannot redirect them; forced ETH has no rescue/sweep path.
 
-Next: add a separate witness runner with an independently computed state model,
-a browser walkthrough, then testnet deployment scripts. Cross-asset lending requires
+A separate JS witness runner and local browser walkthrough are now available;
+see WALKTHROUGH.md. Next: independent testnet deployment verification, durable
+signer state, finality policy and deployment scripts. Cross-asset lending requires
 explicit token transfer semantics and audited oracle/decimal/rounding rules.
 Use this prototype for local experiments only; obtain independent security review
 before real-value use. Guard documentation: https://docs.openzeppelin.com/contracts/5.x/api/utils#ReentrancyGuard

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lorrow · Local loan walkthrough</title><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/" aria-label="Lorrow home"><span class="mark">L</span>lorrow<span class="brand-detail">protocol</span></a><span class="environment"><span class="dot"></span>LOCAL · TEST ASSETS</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">A LOAN, IN PLAIN SIGHT</p><h1>Follow the funds.<br>Verify every exit.</h1><p class="lede">One borrower. One lender. Fixed terms.<br>Walk through a loan and see what the witnesses allow.</p></div><aside class="intro-note"><span class="note-number">01 / LOCAL LAB</span><p>Your computer hosts a temporary blockchain and three witness processes. No wallet or real funds are needed.</p><p class="small">Closing the terminal discards the chain. Witnesses here share one operator and one implementation.</p></aside></section>
+    <div id="notice" class="notice" role="status" aria-live="polite">Connecting to your local chain…</div>
+    <section class="terms" aria-label="Loan terms"><div><span>PRINCIPAL</span><strong id="principal">—</strong><small>test ETH</small></div><div><span>FIXED INTEREST</span><strong id="interest">—</strong><small>test ETH · paid even if early</small></div><div><span>COLLATERAL</span><strong id="collateral">—</strong><small>test ETH · locked in escrow</small></div><div><span>TIME TO REPAY</span><strong>120<span class="unit"> seconds</span></strong><small>plus 30 seconds of grace</small></div></section>
+    <section class="workspace">
+      <div class="journey">
+        <div class="section-heading"><div><p class="eyebrow">THE WALKTHROUGH</p><h2>Choose a path. Take each step.</h2></div><button class="button subtle" data-action="reset">New test loan ↗</button></div>
+        <div class="tabs" role="tablist" aria-label="Loan scenario"><button id="tab-repayment" role="tab" aria-selected="true" aria-controls="steps" data-path="repayment">Repayment</button><button id="tab-default" role="tab" aria-selected="false" aria-controls="steps" data-path="default">Default</button><button id="tab-expiry" role="tab" aria-selected="false" aria-controls="steps" data-path="expiry">Never funded</button></div>
+        <p id="path-help" class="path-help"></p>
+        <div id="steps" role="tabpanel" aria-labelledby="tab-repayment"></div>
+        <details class="checks"><summary>Try the security controls</summary><p>Witnesses reject an extra wei of lender payout. A veto cancels a queued proposal and requires a fresh approval and delay.</p><div class="button-row"><button class="button subtle" data-action="rejectExcess">Test incorrect payout</button><button class="button subtle" data-action="veto">Veto queued proposal</button><button class="button subtle" data-action="expireProposal">Expire queued proposal</button><button class="button subtle" data-action="clear">Clear expired proposal</button></div></details>
+      </div>
+      <aside class="state-panel"><p class="eyebrow">LIVE LOAN STATE</p><h2 id="phase">Connecting</h2><div id="state-description" class="state-description"></div><div class="allocation"><span>ELIGIBLE COLLATERAL EXIT</span><div><p>Lender<strong id="lender-allocation">—</strong></p><p>Borrower<strong id="borrower-allocation">—</strong></p></div><small id="eligibility">No allocation eligible yet.</small></div><dl class="state-list"><div><dt>Principal to withdraw</dt><dd id="principal-credit">—</dd></div><div><dt>Repayment to withdraw</dt><dd id="repayment-credit">—</dd></div><div><dt>Borrower collateral credit</dt><dd id="borrower-credit">—</dd></div><div><dt>Lender collateral credit</dt><dd id="lender-credit">—</dd></div><div><dt>Proposal</dt><dd id="proposal">—</dd></div><div><dt>Exit delay remaining</dt><dd id="delay">—</dd></div></dl><p class="clock"><span id="block">—</span><br><span id="clock">—</span><small>The chain clock advances only when you use a time control.</small></p></aside>
+    </section>
+    <section class="witness-section"><div class="section-heading"><div><p class="eyebrow">VERIFY BEFORE SIGNING</p><h2>Three processes. One visible decision.</h2></div><span class="badge">2 OF 3 APPROVAL · 1 VETO</span></div><div id="witnesses" class="witness-grid"></div><p class="small">Each process recomputes the ETH loan rules from chain state. These are public development keys, without bonds, slashing, or production key security.</p></section>
+    <section class="activity-section"><div class="section-heading"><div><p class="eyebrow">ON-CHAIN & LOCAL ACTIVITY</p><h2>The evidence trail</h2></div></div><ol id="events" class="events"></ol></section>
+    <details class="addresses"><summary>Loan and participant addresses</summary><dl id="addresses"></dl></details>
+  </main>
+  <footer><span>Lorrow / Open-source lending research</span><span>Local prototype · Unaudited · No real-value use</span></footer>
+</body>
+</html>

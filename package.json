@@ -4,7 +4,9 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "test": "npm --prefix contracts test",
-    "demo": "npm --prefix contracts run demo"
+    "test": "npm --prefix contracts test && npm run test:walkthrough",
+    "demo": "npm --prefix contracts run demo",
+    "walkthrough": "node contracts/demo/server.mjs",
+    "test:walkthrough": "node contracts/test/walkthrough.mjs"
   }
 }
