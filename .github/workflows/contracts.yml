@@ -41,9 +41,20 @@ jobs:
         run: node "$RUNNER_TEMP/lorrow-browser/node_modules/playwright/cli.js" install chromium --with-deps
       - name: Exercise browser walkthrough
         run: LORROW_PLAYWRIGHT_MODULE="$RUNNER_TEMP/lorrow-browser/node_modules/playwright" node contracts/test/browser.mjs
+      - name: Exercise wallet and durable-witness integration on a local Sepolia-tagged chain
+        run: LORROW_PLAYWRIGHT_MODULE="$RUNNER_TEMP/lorrow-browser/node_modules/playwright" node contracts/test/testnet-browser.mjs
+      - name: Build public static testnet interface
+        run: npm run testnet:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lorrow-testnet-site
+          path: .lorrow/site/
+          include-hidden-files: true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: walkthrough-screenshots
-          path: contracts/artifacts/walkthrough-*.png
+          path: |
+            contracts/artifacts/walkthrough-*.png
+            contracts/artifacts/testnet-wallet-*.png
           if-no-files-found: ignore

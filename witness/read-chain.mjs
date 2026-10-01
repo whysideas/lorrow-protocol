@@ -1,7 +1,10 @@
 import {Contract,keccak256} from '../contracts/demo/deps.mjs';
 // All calls are pinned to one block. Reject a reorganization before signing.
-export async function readChain(provider,artifacts,config) {
-  const number=await provider.send('eth_blockNumber',[]);
+export async function readChain(provider,artifacts,config,blockTag=null) {
+  const selected=blockTag===null?await provider.send('eth_blockNumber',[]):blockTag;
+  const selectedBlock=await provider.getBlock(selected);
+  if(!selectedBlock)throw new Error('Missing selected block');
+  const number='0x'+selectedBlock.number.toString(16);
   const block=await provider.getBlock(number);
   if(!block)throw new Error('Missing block');
   const call={blockTag:number};

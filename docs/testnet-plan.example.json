@@ -1,0 +1,19 @@
+{
+  "collateral": "3000000000000000",
+  "witnesses": [
+    "0xREPLACE_WITH_WITNESS_1_ADDRESS",
+    "0xREPLACE_WITH_WITNESS_2_ADDRESS",
+    "0xREPLACE_WITH_WITNESS_3_ADDRESS"
+  ],
+  "terms": {
+    "lender": "0xREPLACE_WITH_LENDER_ADDRESS",
+    "principal": "1000000000000000",
+    "interest": "100000000000000",
+    "duration": "1800",
+    "grace": "600",
+    "fundingDeadline": "REPLACE_WITH_FUTURE_UNIX_TIMESTAMP",
+    "exitDelay": "1800",
+    "approvalThreshold": "2",
+    "vetoThreshold": "1"
+  }
+}

@@ -10,3 +10,5 @@ target/
 .env.*
 !.env.example
 .DS_Store
+.lorrow/
+*.keystore.json

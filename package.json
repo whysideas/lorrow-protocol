@@ -4,9 +4,16 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "test": "npm --prefix contracts test && npm run test:walkthrough",
+    "test": "npm --prefix contracts test && npm run test:walkthrough && npm run test:testnet",
     "demo": "npm --prefix contracts run demo",
     "walkthrough": "node contracts/demo/server.mjs",
-    "test:walkthrough": "node contracts/test/walkthrough.mjs"
+    "test:walkthrough": "node contracts/test/walkthrough.mjs",
+    "testnet": "node testnet/server.mjs",
+    "testnet:build": "node testnet/build.mjs",
+    "testnet:verify": "node testnet/verify-cli.mjs",
+    "testnet:deploy": "node testnet/deploy.mjs",
+    "witness:init": "node testnet/keys.mjs",
+    "witness:sign": "node witness/cli.mjs",
+    "test:testnet": "node contracts/test/testnet.mjs && node contracts/test/testnet-deploy.mjs"
   }
 }

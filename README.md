@@ -29,6 +29,18 @@ queue, veto and settle a loan with local test assets. The command starts the
 local chain and three witness processes. Keep the terminal running; Ctrl+C stops
 and discards the chain. See [the walkthrough guide](docs/WALKTHROUGH.md).
 
+## Prepare a Sepolia pilot
+
+```sh
+npm run testnet
+```
+
+Open **http://127.0.0.1:4174** to use a browser wallet. This interface deploys and
+verifies source/runtime, exchanges durable witness signature files, and submits
+wallet-confirmed transactions. It starts no local chain and holds no wallet key.
+Use fresh test-only accounts and faucet ETH; no public deployment is claimed.
+Read [the setup, signing and recovery guide](docs/TESTNET.md) before deploying.
+
 ## What is implemented
 
 - A directly deployed, immutable native-ETH vault for one loan.
@@ -42,6 +54,9 @@ and discards the chain. See [the walkthrough guide](docs/WALKTHROUGH.md).
 - Thirty escrow checks plus loan scenarios and varied loan allocations.
 - Browser walkthrough of repayment/default/unfunded expiry and proposal security controls.
 - Three separate local witness processes with an independent JS rules implementation.
+- Encrypted standalone witness keys, durable signature journal and restart recovery.
+- Finalized-state signing and exact constructor/runtime verification.
+- Resumable Sepolia deployment scripts and a buildable wallet-connected interface.
 
 The mutable `MockPolicy` is exclusively a test fixture. It is not debt accounting and must never secure a loan. Honest witnesses can reject a policy mistake only when all relevant vault paths correctly enforce their gate. A vault bug can bypass that protection.
 
@@ -51,11 +66,12 @@ The mutable `MockPolicy` is exclusively a test fixture. It is not debt accountin
 |---|---|
 | `contracts/` | Vault, fixed-term loan, test fixtures and local EVM suites |
 | `witness/` | Local signer processes and independently computed ETH rules model |
-| `app/` | Local browser walkthrough served by the Node demo server |
+| `app/` | Local walkthrough and wallet-connected Sepolia interface |
+| `testnet/` | Static build, key setup, deployment and verification tools |
 | `docs/` | Solo-build roadmap, architecture notes and proposed compensation |
 | `.github/workflows/` | Automated local contract tests |
 
-Witnesses and the browser walkthrough now have working local implementations. A reusable SDK and wallet-connected testnet interface remain future work.
+Witnesses and the browser walkthrough now have working local implementations. A reusable SDK, independent operators and a recorded public testnet deployment remain future work.
 
 ## Build milestones
 
@@ -65,7 +81,7 @@ Witnesses and the browser walkthrough now have working local implementations. A 
 3. Implement partial repayment, breach, cure and recovery required by Core.
 4. **Done locally:** independent JS state model and three signer processes. Rust, durable signing and independent operation remain future work.
 5. **Done locally:** browser UI and one-command loan walkthrough.
-6. Publish a public testnet demonstration and invite independent review.
+6. **Preparation complete:** durable signing, deployment verification, wallet interface and scripts. A real public-chain run, hosted pilot and independent review remain launch work.
 
 See [minimal loan rules and ten invariants](docs/MINIMAL_LOAN.md), [the active solo-build plan](docs/ROADMAP.md), [fee proposal](docs/FEES.md), [vault details](contracts/README.md) and [contribution guide](CONTRIBUTING.md).
 
