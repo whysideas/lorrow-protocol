@@ -1,0 +1,12 @@
+node_modules/
+/contracts/node_modules
+artifacts/
+test-results.json
+coverage/
+out/
+cache/
+target/
+.env
+.env.*
+!.env.example
+.DS_Store
