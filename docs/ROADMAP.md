@@ -7,8 +7,8 @@ The [original roadmap](original-roadmap.md) preserves the initial design and ten
 ## Milestones
 
 1. **Repository foundation:** public Apache-2.0 source, standard link, vault prototype, reproducible local smoke suite, contribution guide and CI.
-2. **Real local loan policy:** ETH collateral, mock-USDC loan asset, atomic funding, immutable terms, accrued interest and real repayment transfers. Validate creditor/borrower consent and token balances.
-3. **Default correctness:** maturity grace, debt-capped collateral recovery, surplus return, exact decimal/price/rounding semantics and repayment/settlement race handling.
+2. **Real local loan policy (ETH-only complete):** named-lender funding after collateral locking, immutable terms, fixed total interest, pull payments and full repayment. Cross-asset mock-USDC funding and accrued interest remain future extensions.
+3. **Default correctness (same-asset complete):** exact maturity/grace boundaries, fixed-debt collateral recovery and surplus return. See MINIMAL_LOAN.md. Cross-asset decimal/price/rounding rules and late cure remain future work.
 4. **Core lifecycle:** partial repayments, cure, breach observations, recovery clock reset and complete compatibility matrix. Delayed exits need an explicitly accepted standard extension/revision.
 5. **Independent witnesses:** Rust model, canonical replay, signed exact proposals, vetoes, three distinct local processes, failure and malicious-proposal demonstrations. Three processes controlled by one founder are a simulation, not independent decentralization.
 6. **Usable demonstration:** SDK, browser frontend, lender offers/borrower requests and repeatable normal/default/security scenarios. Anyone can reproduce the same result from clean machines.
