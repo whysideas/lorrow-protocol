@@ -15,9 +15,25 @@ The [original roadmap](original-roadmap.md) preserves the initial design and ten
 7. **Public testnet (preparation implemented):** encrypted signer keys and durable journals, finalized-state approvals, exact deployment/runtime verification, resumable scripts and a static wallet interface. See TESTNET.md. Actual public deployment, hosted pilot, independent operators and recorded public-chain scenarios remain launch work. No real-money market at this stage.
 8. **Independent assurance:** external economic/security review, production witness operators, funded audits/bounties and staged exposure limits.
 
+## Cross-asset oracle consensus extension
+
+The next cross-asset architecture adopts [witness-integrated oracle consensus](ORACLE_CONSENSUS.md).
+Witnesses independently collect diverse eligible market evidence, validate and sign
+an exact price certificate, then separately approve the loan's exact settlement.
+An immutable security profile fixes sources, dependency groups, quorums, freshness,
+deviation, sampled breach persistence and surplus arithmetic at origination.
+Missing/disputed data resets breach evidence and blocks price-based default;
+repayment and collateral top-ups remain available under the new loan rules.
+
+The ETH-to-ETH pilot does not need pricing and is unchanged. This extension is
+architecture only: price adapters, certificates, cross-asset policy and new witness
+signing paths remain unimplemented. Build shared vectors and a local replay harness
+first. Before cross-asset contracts, demonstrate that certificate lifetime, price
+update cadence, finality and exit delay permit fresh settlement without suppressing
+recovery observations. Review upstream compatibility before claiming Core compliance.
+
 Add packages only when their code works. `witness/` and `app/` now contain local implementations. Planned `sdk/` and `test-vectors/` remain future work. See WALKTHROUGH.md for the local signer trust boundary.
 
 ## Runtime independence
 
 GitHub stores source and publishes builds; contracts execute on the blockchain and witnesses run on independently operated machines. All frontend and node configuration must support alternate providers. Repository hosting must not custody collateral or authorize loan settlement.
-
