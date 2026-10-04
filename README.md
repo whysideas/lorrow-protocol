@@ -83,9 +83,11 @@ Witnesses and the browser walkthrough now have working local implementations. A 
 5. **Done locally:** browser UI and one-command loan walkthrough.
 6. **Preparation complete:** durable signing, deployment verification, wallet interface and scripts. A real public-chain run, hosted pilot and independent review remain launch work.
 
-See [minimal loan rules and ten invariants](docs/MINIMAL_LOAN.md), [the active solo-build plan](docs/ROADMAP.md), [fee proposal](docs/FEES.md), [vault details](contracts/README.md) and [contribution guide](CONTRIBUTING.md).
+See [minimal loan rules and ten invariants](docs/MINIMAL_LOAN.md), [the active solo-build plan](docs/ROADMAP.md), [witness-integrated oracle consensus architecture](docs/ORACLE_CONSENSUS.md), [fee proposal](docs/FEES.md), [vault details](contracts/README.md) and [contribution guide](CONTRIBUTING.md).
+
+The oracle-consensus architecture is adopted for the next cross-asset research
+implementation; it is not a running price service or a change to the ETH-only pilot.
 
 ## Licensing and stewardship
 
 Code and implementation documentation are Apache-2.0; upstream specification material retains its CC BY 4.0 license. Third-party dependencies retain their own licenses. WHYSIDEAS stewards the project initially. Contributors receive attribution; contributions do not automatically create ownership, tokens or payment rights.
-
